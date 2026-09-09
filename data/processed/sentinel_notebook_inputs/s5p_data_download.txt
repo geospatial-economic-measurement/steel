@@ -1,0 +1,167 @@
+var bitwiseExtract = function(input, fromBit, toBit) {
+  var maskSize = ee.Number(1).add(toBit).subtract(fromBit);
+  var mask = ee.Number(1).leftShift(maskSize).subtract(1);
+  return input.rightShift(fromBit).bitwiseAnd(mask);
+};
+
+
+var qcControlForMod11a1Day = function(qcDayLayer, lstDayLayer) {
+  var lstMasked = function(image) {
+    var qcDay = image.select(qcDayLayer);
+    var lstDay = image.select(lstDayLayer);
+    
+
+    var qaMask = bitwiseExtract(qcDay, 0, 1).lte(1);
+    var dataQualityMask = bitwiseExtract(qcDay, 2, 3).eq(0); 
+    var lstErrorMask = bitwiseExtract(qcDay, 6, 7).eq(0); 
+    var mask = qaMask.and(dataQualityMask).and(lstErrorMask);
+    
+    return lstDay.updateMask(mask); 
+  };
+  return lstMasked;
+};
+
+
+var qcControlForMod11a1Night = function(qcNightLayer, lstNightLayer) {
+  var lstMasked = function(image) {
+    var qcNight = image.select(qcNightLayer);
+    var lstNight = image.select(lstNightLayer);
+    
+    var qaMask = bitwiseExtract(qcNight, 0, 1).lte(1); 
+    var dataQualityMask = bitwiseExtract(qcNight, 2, 3).eq(0); 
+    var lstErrorMask = bitwiseExtract(qcNight, 6, 7).eq(0); 
+    var mask = qaMask.and(dataQualityMask).and(lstErrorMask);
+    
+    return lstNight.updateMask(mask); 
+  };
+  return lstMasked;
+};
+
+
+function createSquareBuffer(feature) {
+  var lon = ee.Number(feature.get('lng'));
+  var lat = ee.Number(feature.get('lat'));
+  var lonOffset = ee.Number(0.009);  
+  var latOffset = ee.Number(0.009);  
+  
+  var rectangle = ee.Geometry.Rectangle({
+    coords: [
+      lon.subtract(lonOffset), lat.subtract(latOffset),
+      lon.add(lonOffset), lat.add(latOffset)
+    ],
+    geodesic: false  
+  });
+
+  return feature.setGeometry(rectangle);
+}
+
+
+function createFeaturesWithQC(feature) {
+  return ee.FeatureCollection(ee.List.sequence(2019, 2022).map(function(year) {
+    return ee.List.sequence(1, 12).map(function(month) {
+      var outputIndex = ee.Number(year).subtract(2019).multiply(12).add(month).subtract(1); 
+      var outputFieldName = ee.String('output').cat(outputIndex.add(1).format('%d')); 
+      var outputValue = feature.get(outputFieldName);
+
+      var date = ee.Date.fromYMD(year, month, 1);
+      var end = date.advance(1, 'month');
+
+  
+      var lstImageCollection = ee.ImageCollection("MODIS/006/MYD11A1")
+        .filterDate(date, end)
+        .select(['LST_Day_1km', 'LST_Night_1km', 'QC_Day', 'QC_Night']);
+      
+ 
+      var dayMaskedFunction = qcControlForMod11a1Day('QC_Day', 'LST_Day_1km');
+      var nightMaskedFunction = qcControlForMod11a1Night('QC_Night', 'LST_Night_1km');
+      
+
+      var lstImage = lstImageCollection.map(function(image) {
+        var lstDay = dayMaskedFunction(image);
+        var lstNight = nightMaskedFunction(image);
+        return ee.Image.cat([lstDay.rename('LST_Day'), lstNight.rename('LST_Night')]);
+      }).mean();  
+
+ 
+      var sentinelNO2 = ee.ImageCollection("COPERNICUS/S5P/OFFL/L3_NO2")
+                          .select(['NO2_column_number_density', 'cloud_fraction'])
+                          .map(function(image) {
+                            return image.updateMask(image.select('cloud_fraction').lte(0.5))
+                                        .select(['NO2_column_number_density']);
+                          });
+
+      var sentinelSO2 = ee.ImageCollection("COPERNICUS/S5P/OFFL/L3_SO2")
+                          .select(['SO2_column_number_density', 'cloud_fraction'])
+                          .map(function(image) {
+                            return image.updateMask(image.select('cloud_fraction').lte(0.5))
+                                        .select(['SO2_column_number_density']);
+                          });
+
+      var sentinelO3 = ee.ImageCollection("COPERNICUS/S5P/OFFL/L3_O3")
+                          .select(['O3_column_number_density', 'cloud_fraction'])
+                          .map(function(image) {
+                            return image.updateMask(image.select('cloud_fraction').lte(0.5))
+                                        .select(['O3_column_number_density']);
+                          });
+
+      var sentinelCO = ee.ImageCollection("COPERNICUS/S5P/OFFL/L3_CO")
+                          .select(['CO_column_number_density']);
+
+      var viirs = ee.ImageCollection("NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG")
+                  .select('avg_rad'); 
+
+      var combinedImage = ee.Image.cat([
+        sentinelNO2.filterDate(date, end).mean().select('NO2_column_number_density'),
+        sentinelSO2.filterDate(date, end).mean().select('SO2_column_number_density'),
+        sentinelO3.filterDate(date, end).mean().select('O3_column_number_density'),
+        sentinelCO.filterDate(date, end).mean().select('CO_column_number_density'),
+        viirs.filterDate(date, end).mean().select('avg_rad')
+      ]);
+
+
+      var finalImage = lstImage.addBands(combinedImage)
+                         .unmask(ee.Image.constant(-9999)); 
+
+      var meanValues = finalImage.reduceRegion({
+        reducer: ee.Reducer.mean(),
+        geometry: feature.geometry(),
+        scale: 1000
+      });
+
+
+  
+      return ee.Feature(feature.geometry(), meanValues)
+                .set('output', outputValue)
+                .set('year', year)
+                .set('month', month)
+                .set('id', feature.get('id'))
+                .set('Longitude', feature.get('lng'))
+                .set('Latitude', feature.get('lat'));
+    });
+  }).flatten());
+}
+
+var bufferedFactories = factories.map(createSquareBuffer);
+
+var allFeatures = bufferedFactories.map(function(feature) {
+  var validFeatures = createFeaturesWithQC(feature); 
+  return validFeatures;
+}).flatten();
+
+print(allFeatures);
+
+Export.table.toDrive({
+  collection: allFeatures,
+  description: 'Factory_Emission_And_LST',
+  fileFormat: 'CSV'
+});
+
+
+var withSO2 = allFeatures.filter(ee.Filter.notNull(['SO2_column_number_density'])); 
+var withLstDay = allFeatures.filter(ee.Filter.notNull(['LST_Day']));
+var withLstNight = allFeatures.filter(ee.Filter.notNull(['LST_Night']));
+
+
+print('Number of Features with SO2:', withSO2.size());
+print('Number of Features with LST_Day:', withLstDay.size());
+print('Number of Features with LST_Night:', withLstNight.size());
