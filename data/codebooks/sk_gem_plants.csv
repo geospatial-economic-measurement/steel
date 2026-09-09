@@ -1,0 +1,16 @@
+plant_name,company,lat,lon,nom_capacity_ttpa,bof_capacity_ttpa,eaf_capacity_ttpa,status,technology
+DaehanSteel Noksan steel plant,Daehan Steel Co Ltd,35.099098,128.860339,1000,0,1000,operating,EAF
+Dongkuk Steel Incheon steel plant,Dongkuk Steel Mill Co Ltd,37.486465,126.638607,2200,0,2200,operating,EAF
+Dongkuk Steel Pohang steel plant,Dongkuk Steel Mill Co Ltd,36.00147,129.397609,1400,0,1400,operating,EAF
+Hansco Hwanyoung Steel Dangjin plant,Hwanyoung Steel Industries Co Ltd,36.956486,126.616956,800,0,800,operating,EAF
+Hyundai Steel Dangjin steel plant,Hyundai Steel Co,36.986282,126.69735,16200,12600,3600,operating,BF; BOF; EAF/DRI
+Hyundai Steel Incheon steel plant,Hyundai Steel Co,37.489678,126.637942,4697,0,4697,operating,EAF
+Hyundai Steel Pohang steel plant,Hyundai Steel Co,36.004981,129.384829,3400,0,3400,operating,EAF
+KG Steel Incheon steel plant,KG Steel Co Ltd,37.482625,126.670175,1000,0,1000,operating,EAF
+KISCO steel Changwon plant,KISCO Corp,35.216552,128.640158,3000,0,3000,operating,EAF
+POSCO Gwangyang steel plant,POSCO Holdings Inc,34.920086,127.74865,25499,22999,2500,operating,BF; BOF/DRI/EAF
+POSCO Pohang steel plant,POSCO Holdings Inc,36.00931,129.394508,21258,17401,3857,operating,BF; BOF; DRI; EAF; Iron other/unspecified/DRI; EAF/BF
+SeAH Besteel Gunsan steel plant,SeAH Besteel Holdings Corp,35.968596,126.609524,2101,0,2101,operating,EAF
+SeAH Changwon Integrated Special Steel plant,SeAH Changwon Integrated Special Steel Corp,35.204191,128.604277,1200,0,1200,operating,EAF
+SeAH Steel Pohang plant,SeAh Steel Holdings Corp,35.991176,129.375791,1200,0,1200,operating,EAF
+YK Steel Busan plant,YK Steel Corp,35.083819,128.989034,930,0,930,operating,EAF
