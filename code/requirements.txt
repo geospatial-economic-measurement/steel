@@ -1,0 +1,26 @@
+# Verified on Python 3.13 (Windows), 2026-09-08.
+# Pinned to the versions the shipped outputs were produced with.
+
+pandas==2.3.3
+numpy==2.4.2
+scipy==1.17.1
+scikit-learn==1.8.0
+xgboost==3.2.0
+matplotlib==3.10.8
+shap==0.51.0
+joblib==1.5.3
+openpyxl==3.1.5
+
+# location classifier (steel_location_mlp.h5)
+tensorflow==2.21.0
+keras==3.14.0
+
+# supporting figures
+umap-learn==0.5.11
+Cartopy==0.25.0
+
+# only needed for the --with-gee download scripts (28, 29, 35, 39)
+earthengine-api==1.7.22
+
+# GeoShapley is used for the spatial SHAP attribution figures and is installed
+# from source: https://github.com/Ziqi-Li/geoshapley
