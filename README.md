@@ -4,7 +4,7 @@
 
 Yang, Ai & Arkolakis
 
-## Introduction
+## Instructions
 
 ```bash
 cd code
