@@ -1,5 +1,3 @@
-"""Canonical paths. Everything is relative to this file, so the package runs
-from wherever it is unzipped."""
 import os
 
 CODE = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +23,6 @@ SCRATCH = os.path.join(REP_ROOT, "scratch")
 for _d in (OUT_FIG, OUT_TAB, OUT_TAB_INTERMEDIATE, OUT_RL, SCRATCH):
     os.makedirs(_d, exist_ok=True)
 
-# Set NC_STEEL_PAPER_FIG to also copy figures into the manuscript folder.
 PAPER_FIG = os.environ.get("NC_STEEL_PAPER_FIG") or None
 
 RESTRICTED = {
