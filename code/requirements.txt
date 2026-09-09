@@ -19,8 +19,5 @@ keras==3.14.0
 umap-learn==0.5.11
 Cartopy==0.25.0
 
-# only needed for the --with-gee download scripts (28, 29, 35, 39)
-earthengine-api==1.7.22
-
 # GeoShapley is used for the spatial SHAP attribution figures and is installed
 # from source: https://github.com/Ziqi-Li/geoshapley
