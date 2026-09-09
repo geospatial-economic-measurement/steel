@@ -1,6 +1,7 @@
 # Replication package
 
 **A Geospatial Approach to Measuring Economic Activity**
+
 Yang, Ai & Arkolakis
 
 ## Introduction
