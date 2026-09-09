@@ -49,7 +49,7 @@ Exact pins in `code/requirements.txt`.
 
 | Exhibit            | File(s) in`output/figures`                              | Script      |
 | ------------------ | --------------------------------------------------------- | ----------- |
-| **Figure 1** | `Figure_01a.png`, `Figure_01b.jpg`                    | `08 / –` |
+| **Figure 1** | `Figure_01a.png`, `Figure_01b.jpg`                    | `08` |
 | **Figure 2** | `Figure_02.pdf`                                         | `04`      |
 | **Figure 3** | `Figure_03a.pdf`, `Figure_03b.pdf`                    | `11 / 09` |
 | **Figure 4** | `Figure_04.pdf`                                         | `12`      |
