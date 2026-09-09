@@ -1,0 +1,8 @@
+﻿block,exercise,resolution,scale,n,r,R2,RMSE,RMSE_unit,letter_ref
+1_crosssec_level,crosssec_8020,grid,log,5290,0.9396,0.875,0.5404,log output,Table 8 row 1 (grid CS level)
+1_crosssec_level,crosssec_8020,plant,log,797,0.9296,0.8612,0.3029,log1p output,Table 8 row 2 (plant CS level)
+2_temporal_level,temporal_2022,grid,orig,7498,0.8181,0.5954,6.1678,10k MT/mo (orig),Table 8 row 3 (grid 2022 level)
+2_temporal_level,temporal_2022,plant,orig,1130,0.9066,0.7895,20.6691,10k MT/mo (orig),Table 8 row 4 (plant 2022 level)
+3_growth_logdiff,kfold_annual_logdiff,grid,log,1752,0.8458,0.6785,0.207,log points,Table 8 row 5 (grid unit log-diff)
+3_growth_logdiff,kfold_annual_logdiff,plant,log,263,0.7812,0.5797,0.1962,log points,Table 8 row 6 (plant unit log-diff)
+3_growth_logdiff,kfold_national_agg,national_grid,pct,33,0.8505,0.6106,5.9896,pct points,Table 8 row 7 (grid national agg)

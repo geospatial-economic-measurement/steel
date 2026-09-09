@@ -1,0 +1,37 @@
+﻿exercise,level_or_growth,resolution,sample,n,r,R2,RMSE,RMSE_unit
+temporal_2022,level,plant,full,1130,0.9066,0.7895,20.6691,10k MT/mo (orig)
+temporal_2022,level,plant,large10,1020,0.8979,0.7703,21.6646,10k MT/mo (orig)
+crosssec_8020,level,plant,full,797,0.9296,0.8612,0.3029,log1p output
+crosssec_8020,level,plant,large10,732,0.9154,0.8341,0.2935,log1p output
+temporal_2022,growth_annual,plant,full,93,0.2345,-0.8476,22.9554,pct points
+temporal_2022,growth_annual,plant,large10,84,0.0836,-1.2593,22.9207,pct points
+temporal_2022,growth_monthly,plant,full,1084,0.5397,0.2861,61.1084,pct points
+temporal_2022,growth_monthly,plant,large10,994,0.4904,0.14,41.817,pct points
+temporal_2022,level,grid,full,7498,0.8181,0.5954,6.1678,10k MT/mo (orig)
+temporal_2022,level,grid,large10,6766,0.8054,0.5697,6.4915,10k MT/mo (orig)
+crosssec_8020,level,grid,full,5290,0.9396,0.875,0.5404,log output
+crosssec_8020,level,grid,large10,4789,0.8923,0.7912,0.5119,log output
+temporal_2022,growth_annual,grid,full,616,0.0186,-5.6498,39.3441,pct points
+temporal_2022,growth_annual,grid,large10,558,0.005,-2.3724,28.8555,pct points
+kfold_insample,growth_monthly,plant,full,1084,-0.0926,-0.2209,79.912,pct points
+kfold_insample,growth_monthly,plant,large10,994,-0.0478,-0.4071,53.4884,pct points
+kfold_insample,growth_monthly,grid,full,7239,0.2579,-0.2139,78.8417,pct points
+kfold_insample,growth_monthly,grid,large10,6548,0.2404,-0.167,68.5064,pct points
+province_loo,level,grid,full,26450,0.2507,-0.2129,1.6753,log output
+province_loo,level,grid,large10,23906,0.2538,-0.8169,1.5083,log output
+province_loo,growth_annual,grid,full,616,0.086,-1.7809,25.4432,pct points
+province_loo,growth_annual,grid,large10,558,0.105,-1.4154,24.4205,pct points
+province_loo,level,plant,full,3981,0.3272,-0.0378,0.8254,log1p output
+province_loo,growth_annual,plant,full,92,0.1947,-0.7364,21.18,pct points
+geo_holdout_full,growth_annual,plant_south,full,120,0.9822,0.8398,39.8217,pct points
+geo_holdout_matched,growth_annual,plant_south,full,118,-0.0117,-0.9516,18.5988,pct points
+geo_holdout_full,growth_annual,plant_north,full,146,0.8506,0.7216,62.7657,pct points
+geo_holdout_matched,growth_annual,plant_north,full,138,0.0178,-10.1223,54.6081,pct points
+kfold_insample,growth_agg,national_plant,full,33,0.8326,0.6124,6.1261,pct points
+kfold_insample,growth_agg,national_grid,full,33,0.8505,0.6106,5.9896,pct points
+geo_holdout,growth_agg,regional_south,full,33,0.2951,-0.3084,10.8657,pct points
+geo_holdout,growth_agg,regional_north,full,33,0.4746,0.2178,9.5744,pct points
+kfold_insample,growth_annual_logdiff,plant,full,263,0.7812,0.5797,0.1962,log points (dlog)
+kfold_insample,growth_annual_logdiff,plant,large10,241,0.7323,0.4975,0.1785,log points (dlog)
+kfold_insample,growth_annual_logdiff,grid,full,1752,0.8458,0.6785,0.207,log points (dlog)
+kfold_insample,growth_annual_logdiff,grid,large10,1585,0.8283,0.6424,0.1919,log points (dlog)

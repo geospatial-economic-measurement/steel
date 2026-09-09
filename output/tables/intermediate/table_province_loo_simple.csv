@@ -1,0 +1,4 @@
+﻿row,n,r,R2,RMSE,RMSE_unit
+level_plantmonth,3981,0.3272,-0.0378,0.8254,log1p output
+level_plantmean,96,0.3763,0.0473,0.7618,log1p output
+growth,92,0.1947,-0.7364,21.18,pct points
