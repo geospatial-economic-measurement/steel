@@ -33,7 +33,7 @@ Two groups are excluded from the public archive:
 
 |                                                               | What                            | How to get it                                                                            |
 | ------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------- |
-| `data/processed/confidential/`                              | CISA production labels, 5 files | Licensed commercial data — access via[mysteel.com](https://www.mysteel.com)              |
+| `data/processed/confidential/`                              | CISA production labels, 5 files | Licensed commercial data — access via [mysteel.com](https://www.mysteel.com)              |
 | `data/SK`, `NK`, `IR`, `first/second_output_file.csv` | satellite panels                | Rebuild with scripts`28`, `29`, `35`, `39` (needs a Google Earth Engine account) |
 
 `00_run_all.py` skips whatever depends on confidential data.
