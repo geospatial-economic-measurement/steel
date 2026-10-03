@@ -109,3 +109,5 @@ Exact pins in `code/requirements.txt`.
 8. **Robustness** — `41`‡ `42`‡ `43`‡ `44`‡ `45`‡ `46`‡ `47`‡ `48`‡
 
 Two ordering constraints: `10` before `11`, and `01`/`02` before `03`/`05`/`06`/`09`.
+
+https://doi.org/10.5281/zenodo.23114363
