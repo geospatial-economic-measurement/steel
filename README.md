@@ -20,7 +20,6 @@ Figures go to `output/figures`, tables to `output/tables`. All paths are relativ
 code/     scripts; _paths.py defines all locations
 data/     inputs (processed/confidential/ is restricted — see below)
 output/   figures/ and tables/ — everything in the paper and SI
-output_rl/ diagnostics; not part of the submission
 ```
 
 `output/figures` holds one file per figure, named by its number:
